@@ -6,7 +6,6 @@ import { env } from "~/env";
 import { planetscale } from "@lucia-auth/adapter-mysql";
 import { google } from "@lucia-auth/oauth/providers";
 import { connection } from "~/server/db";
-import { userKeys, userSessions, users } from "~/server/db/schema";
 import { getBaseUrl } from "~/utils/api";
 import { nextjs_future } from "lucia/middleware";
 
