@@ -12,7 +12,7 @@ export const getServerSideProps = async (
 ): Promise<
   GetServerSidePropsResult<{
     userId: string;
-    githubUsername: string;
+    username: string;
   }>
 > => {
   const authRequest = auth.handleRequest(context);
@@ -28,7 +28,7 @@ export const getServerSideProps = async (
   return {
     props: {
       userId: session.user.userId,
-      githubUsername: session.user.githubUsername,
+      username: session.user.username,
     },
   };
 };
@@ -42,7 +42,7 @@ const Page = (
     <>
       <h1>Profile</h1>
       <p>User id: {props.userId}</p>
-      <p>GitHub username: {props.githubUsername}</p>
+      <p>Username: {props.username}</p>
       <form
         method="post"
         action="/api/logout"
