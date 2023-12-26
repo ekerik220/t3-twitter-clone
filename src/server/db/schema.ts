@@ -1,34 +1,39 @@
-// Example model schema from the Drizzle docs
-// https://orm.drizzle.team/docs/sql-schema-declaration
+import { bigint, mysqlTableCreator, varchar } from "drizzle-orm/mysql-core";
 
-import { sql } from "drizzle-orm";
-import {
-  bigint,
-  index,
-  mysqlTableCreator,
-  timestamp,
-  varchar,
-} from "drizzle-orm/mysql-core";
-
-/**
- * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
- * database instance for multiple projects.
- *
- * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
- */
-export const mysqlTable = mysqlTableCreator((name) => `t3-twitter-clone_${name}`);
-
-export const posts = mysqlTable(
-  "post",
-  {
-    id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-    name: varchar("name", { length: 256 }),
-    createdAt: timestamp("created_at")
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: timestamp("updatedAt").onUpdateNow(),
-  },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
-  })
+export const mysqlTable = mysqlTableCreator(
+  (name) => `t3-twitter-clone_${name}`,
 );
+
+export const users = mysqlTable("user", {
+  id: varchar("id", {
+    length: 15,
+  }).primaryKey(),
+  username: varchar("username", { length: 255 }).notNull(),
+});
+
+export const userKeys = mysqlTable("user_key", {
+  id: varchar("id", {
+    length: 255,
+  }).primaryKey(),
+  userId: varchar("user_id", {
+    length: 15,
+  }).notNull(),
+  hashedPassword: varchar("hashed_password", {
+    length: 255,
+  }),
+});
+
+export const userSessions = mysqlTable("user_session", {
+  id: varchar("id", {
+    length: 128,
+  }).primaryKey(),
+  userId: varchar("user_id", {
+    length: 15,
+  }).notNull(),
+  activeExpires: bigint("active_expires", {
+    mode: "number",
+  }).notNull(),
+  idleExpires: bigint("idle_expires", {
+    mode: "number",
+  }).notNull(),
+});
