@@ -12,8 +12,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@lucia-auth/adapter-mysql": "^2.1.0",
-    "@lucia-auth/oauth": "^3.5.0",
+    "@auth/drizzle-adapter": "^0.3.12",
     "@planetscale/database": "^1.13.0",
     "@t3-oss/env-nextjs": "^0.7.1",
     "@tanstack/react-query": "^4.36.1",
@@ -22,8 +21,8 @@
     "@trpc/react-query": "^10.44.1",
     "@trpc/server": "^10.44.1",
     "drizzle-orm": "^0.29.1",
-    "lucia": "^2.7.6",
     "next": "^14.0.4",
+    "next-auth": "^4.24.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "superjson": "^2.2.1",
